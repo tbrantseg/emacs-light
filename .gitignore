@@ -1,0 +1,10 @@
+auto-save-list/*
+auto-saves/*
+backups/*
+customize.el
+auto-saves.*
+'#.*
+recentf
+*~
+elpa/*
+transient/*
