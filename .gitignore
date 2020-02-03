@@ -8,3 +8,5 @@ recentf
 *~
 elpa/*
 transient/*
+request/*
+session.*

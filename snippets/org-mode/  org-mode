@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: jupyter-block
+# key: <j
+# --
+#+BEGIN_SRC jupyter-python :session ${1:`(file-name-sans-extension (file-name-nondirectory buffer-file-name))`}
+$0
+#+END_SRC
