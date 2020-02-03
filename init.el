@@ -252,6 +252,7 @@
   :after org
   :init
   (setq org-confirm-babel-evaluate nil)
+  (add-to-list 'org-babel-after-execute-hook 'org-redisplay-inline-images)
   :config
   (add-to-list 'org-babel-after-execute-hook 'org-redisplay-inline-images)
   (org-babel-do-load-languages
