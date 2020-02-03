@@ -251,6 +251,7 @@
   :ensure t
   :init
   (setq org-confirm-babel-evaluate nil)
+  (add-to-list 'org-babel-after-execute-hook 'org-redisplay-inline-images)
   :config
   (org-babel-do-load-languages
    'org-babel-load-languages
