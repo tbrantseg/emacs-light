@@ -147,9 +147,9 @@
   :ensure t
   :config
   (sp-with-modes '(c-mode c++-mode)
-    (sp-local-pair "{" nil :post-handlers '(("||\n[i]" "RET")))
-    (sp-local-pair "/*" "/*" :post-handlers '((" | " "SPC")
-					      ("* ||\n[i]" "RET"))))
+		 (sp-local-pair "{" nil :post-handlers '(("||\n[i]" "RET")))
+		 (sp-local-pair "/*" "/*" :post-handlers '((" | " "SPC")
+							   ("* ||\n[i]" "RET"))))
   (show-smartparens-global-mode +1)
   (smartparens-global-mode 1)
 
@@ -249,9 +249,12 @@
 
 (use-package jupyter
   :ensure t
+  :after org
   :init
   (setq org-confirm-babel-evaluate nil)
+  (add-to-list 'org-babel-after-execute-hook 'org-redisplay-inline-images)
   :config
+  (add-to-list 'org-babel-after-execute-hook 'org-redisplay-inline-images)
   (org-babel-do-load-languages
    'org-babel-load-languages
    '((emacs-lisp . t)
