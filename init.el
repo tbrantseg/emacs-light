@@ -2,7 +2,7 @@
 (require 'package)
 (setq package-enable-at-startup nil)
 (add-to-list 'package-archives
-	     '("melpa" . "https://melpa.org/packages/"))
+	     '("melpa" . "http://melpa.org/packages/"))
 (package-initialize)
 
 (unless (package-installed-p 'use-package)
@@ -68,8 +68,10 @@
 
 (unless window-system
   (menu-bar-mode -1))
-(tool-bar-mode -1)
-(scroll-bar-mode -1)
+(if (fboundp 'tool-bar-mode)
+    (tool-bar-mode -1))
+(if (fboundp 'scroll-bar-mode)
+ (scroll-bar-mode -1))
 (visual-line-mode 1)
 
 (use-package nlinum
