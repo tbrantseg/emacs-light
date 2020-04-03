@@ -1,4 +1,4 @@
-;; Bootstrap use-package
+  ;; Bootstrap use-package
 (require 'package)
 (setq package-enable-at-startup nil)
 (add-to-list 'package-archives
@@ -50,10 +50,10 @@
 		    :height 110
 		    :weight 'normal)
 
-(use-package color-theme-sanityinc-tomorrow
+(use-package darkburn-theme
   :ensure t
   :config
-  (load-theme 'sanityinc-tomorrow-eighties t))
+  (load-theme 'darkburn t))
 
 (use-package smart-mode-line-powerline-theme
   :ensure t)
@@ -249,16 +249,14 @@
   (conda-env-initialize-eshell)
   (conda-env-autoactivate-mode))
 
-(use-package jupyter
+;; company-jedi
+(use-package company-jedi
   :ensure t
-  :after org
-  :init
-  (setq org-confirm-babel-evaluate nil)
-  (add-to-list 'org-babel-after-execute-hook 'org-redisplay-inline-images)
   :config
-  (add-to-list 'org-babel-after-execute-hook 'org-redisplay-inline-images)
-  (org-babel-do-load-languages
-   'org-babel-load-languages
-   '((emacs-lisp . t)
-     (python . t)
-     (jupyter . t))))
+  :hook
+  ((python-mode . jedi:setup))
+  :init
+  (setq jedi:complete-on-dot t)
+  (setq jedi:use-shortcuts t)
+  (add-hook 'python-mode-hook
+	    (lambda () (add-to-list 'company-backends 'company-jedi))))
