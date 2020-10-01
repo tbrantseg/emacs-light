@@ -50,20 +50,25 @@
 		    :height 110
 		    :weight 'normal)
 
-(use-package smart-mode-line-atom-one-dark-theme
-  :ensure t)
-
-(use-package smart-mode-line
-  :ensure t
-  :init
-  (setq sml/theme 'atom-one-dark)
-  :config
-  (sml/setup))
-
 (use-package atom-one-dark-theme
   :ensure t
   :config
-  (load-theme 'atom-one-dark t))
+  (if (daemonp)
+      (add-hook 'after-make-frame-functions
+		(lambda (frame)
+		  (select-frame frame)
+		  (load-theme 'atom-one-dark t)))
+    (load-theme 'atom-one-dark t)))
+
+(use-package powerline
+  :ensure t
+  :config
+  (powerline-center-theme))
+
+(use-package airline-themes
+  :ensure t
+  :config
+  (load-theme 'airline-base16_atelierheath t))
 
 (unless window-system
   (menu-bar-mode -1))
@@ -126,12 +131,11 @@
   :bind
   (("C-x g" . magit-status)))
 
-(use-package lsp-python-ms
+(use-package forge
+  :after magit
   :ensure t
-  :init (setq lsp-python-ms-auto-install-server -t)
-  :hook (python . (lambda ()
-		    (require 'lsp-python-ms)
-		    (lsp))))
+  :config
+  (push '("github.cms.gov" "github.cms.gov/api/v3" "github.cms.gov" forge-github-repository) forge-alist))
 
 ;; Company
 (use-package company
@@ -298,13 +302,24 @@
 (use-package anaconda-mode
   :ensure t)
 
-(use-package lsp-mode :ensure t)
+(use-package lsp-mode
+  :ensure t
+  :hook
+  (add-hook 'python-mode-hook lsp-deferred))
 
 (use-package company-lsp
   :ensure t
   :after lsp-mode
   :config
   (push 'company-lsp company-backends))
+
+(use-package lsp-python-ms
+  :ensure t
+  :after lsp-mode
+  :init ((setq lsp-python-ms-auto-install-server t)
+	 (setq lsp-completion-provider :capf))
+  :hook
+  (python . (lambda () (require 'lsp-python-ms) (lsp))))
 
 ;; Other config
 (setq org-todo-keywords
@@ -352,3 +367,6 @@
   :ensure t
   :after chronos
   :bind (("C-c t" . helm-chronos-add-timer)))
+
+(setq gc-cons-threshold 100000000)
+(setq read-process-output-max (* 1024 1024))
