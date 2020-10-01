@@ -11,6 +11,7 @@
 
 (eval-when-compile
   (require 'use-package))
+(setq use-package-always-ensure t)
 
 ;; Startup
 (setq inhibit-startup-screen t)
@@ -45,30 +46,27 @@
   (load custom-file))
 
 ;; Look and Feel
-(set-face-attribute 'default nil
-		    :family "Inconsolata"
+(set-face-attribute 'default nil	
+	    :family "Inconsolata"
 		    :height 110
 		    :weight 'normal)
 
-(use-package atom-one-dark-theme
-  :ensure t
+(use-package gruvbox-theme
   :config
   (if (daemonp)
       (add-hook 'after-make-frame-functions
 		(lambda (frame)
 		  (select-frame frame)
-		  (load-theme 'atom-one-dark t)))
-    (load-theme 'atom-one-dark t)))
+		  (load-theme 'gruvbox-dark-medium t)))
+    (load-theme 'gruvbox-dark-medium t)))
 
 (use-package powerline
-  :ensure t
   :config
   (powerline-center-theme))
 
 (use-package airline-themes
-  :ensure t
   :config
-  (load-theme 'airline-base16_atelierheath t))
+  (load-theme 'airline-base16_chalk t))
 
 (unless window-system
   (menu-bar-mode -1))
@@ -79,7 +77,6 @@
 (visual-line-mode 1)
 
 (use-package nlinum
-  :ensure t
   :init
   (add-hook 'prog-mode-hook 'nlinum-mode)
   (unless window-system (setq nlinum-format "%d "))
@@ -88,13 +85,11 @@
    ("<M-RET>" . comment-indent-new-line)))
 
 (use-package rainbow-delimiters
-  :ensure t
   :init
   (add-hook 'prog-mode-hook 'rainbow-delimiters-mode))
 
 ;; Helm
 (use-package helm
-  :ensure t
   :init
   (global-unset-key (kbd "C-x c"))
   (when (executable-find "curl")
@@ -126,20 +121,17 @@
 
 ;; Magit
 (use-package magit
-  :ensure t
   :defer t
   :bind
   (("C-x g" . magit-status)))
 
 (use-package forge
   :after magit
-  :ensure t
   :config
   (push '("github.cms.gov" "github.cms.gov/api/v3" "github.cms.gov" forge-github-repository) forge-alist))
 
 ;; Company
 (use-package company
-  :ensure t
   :init
   (add-hook 'after-init-hook 'company-mode)
   (setq company-show-numbers t)
@@ -150,18 +142,15 @@
 
 ;; YASnippet
 (use-package yasnippet
-  :ensure t
   :config
   (yas-global-mode 1)
   (yas-load-directory (expand-file-name (concat user-emacs-directory "snippets"))))
 
 (use-package yasnippet-snippets
-  :ensure t
   :after yasnippet)
 
 ;; Smartparens
 (use-package smartparens
-  :ensure t
   :config
   (sp-with-modes '(c-mode c++-mode)
 		 (sp-local-pair "{" nil :post-handlers '(("||\n[i]" "RET")))
@@ -177,7 +166,6 @@
 
 ;; Which-key
 (use-package which-key
-  :ensure t
   :defer 10
   :config
   (setq which-key-popup-type 'side-window)
@@ -186,7 +174,6 @@
 
 ;; Hydra
 (use-package hydra
-  :ensure t
   :config
   (defhydra tb-system-hydra (:color blue :hint nil)
     "
@@ -293,33 +280,34 @@
 
 ;; Org-ipython
 (use-package conda
-  :ensure t
   :config
   (conda-env-initialize-interactive-shells)
   (conda-env-initialize-eshell)
   (setq conda-anaconda-home "/home/tom/soft/anaconda3"))
 
 (use-package anaconda-mode
-  :ensure t)
-
-(use-package lsp-mode
-  :ensure t
-  :hook
-  (add-hook 'python-mode-hook lsp-deferred))
-
-(use-package company-lsp
-  :ensure t
-  :after lsp-mode
   :config
-  (push 'company-lsp company-backends))
+  (add-hook 'python-mode-hook 'anaconda-mode)
+  (add-hook 'python-mode-hook 'anaconda-eldoc-mode))
+(use-package company-anaconda
+  :config
+  (add-to-list 'company-backends 'company-anaconda))
 
-(use-package lsp-python-ms
-  :ensure t
-  :after lsp-mode
-  :init ((setq lsp-python-ms-auto-install-server t)
-	 (setq lsp-completion-provider :capf))
-  :hook
-  (python . (lambda () (require 'lsp-python-ms) (lsp))))
+;; (use-package lsp-mode
+;;   :hook
+;;   (add-hook 'python-mode-hook lsp-deferred))
+
+;; (use-package company-lsp
+;;   :after lsp-mode
+;;   :config
+;;   (push 'company-lsp company-backends))
+
+;; (use-package lsp-python-ms
+;;   :after lsp-mode
+;;   :init ((setq lsp-python-ms-auto-install-server t)
+;; 	 (setq lsp-completion-provider :capf))
+;;   :hook
+;;   (python . (lambda () (require 'lsp-python-ms) (lsp))))
 
 ;; Other config
 (setq org-todo-keywords
@@ -334,7 +322,6 @@
   (setq python-shell-interpreter "ipython"))
 
 (use-package org-roam
-  :ensure t
   :hook
   (after-init . org-roam-mode)
   :custom
@@ -361,12 +348,13 @@
 	  (alltodo "")))))
 (bind-key "C-c a" 'org-agenda)
 
-(use-package chronos
-  :ensure t)
+(use-package chronos)
 (use-package helm-chronos
-  :ensure t
   :after chronos
   :bind (("C-c t" . helm-chronos-add-timer)))
 
 (setq gc-cons-threshold 100000000)
 (setq read-process-output-max (* 1024 1024))
+
+;; Json mode
+(use-package json-mode)
