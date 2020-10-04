@@ -285,13 +285,22 @@
   (conda-env-initialize-eshell)
   (setq conda-anaconda-home "/home/tom/soft/anaconda3"))
 
-(use-package anaconda-mode
+(use-package elpy
+  :defer t
   :config
-  (add-hook 'python-mode-hook 'anaconda-mode)
-  (add-hook 'python-mode-hook 'anaconda-eldoc-mode))
-(use-package company-anaconda
-  :config
-  (add-to-list 'company-backends 'company-anaconda))
+  (elpy-enable)
+  (setq python-shell-interpreter "jupyter")
+  (setq python-shell-interpreter-args "console --simple-prompt")
+  (setq python-shell-prompt-detect-failure-warning nil)
+  (add-to-list 'python-shell-completion-native-disabled-interpreters "jupyter"))
+
+;; (use-package anaconda-mode
+;;   :config
+;;   (add-hook 'python-mode-hook 'anaconda-mode)
+;;   (add-hook 'python-mode-hook 'anaconda-eldoc-mode))
+;; (use-package company-anaconda
+;;   :config
+;;   (add-to-list 'company-backends 'company-anaconda))
 
 ;; (use-package lsp-mode
 ;;   :hook
@@ -358,3 +367,11 @@
 
 ;; Json mode
 (use-package json-mode)
+(use-package projectile
+  :bind-keymap
+  ("C-c p" . projectile-command-map)
+  :config
+  (use-package helm-projectile)
+  (setq projectile-completion-system 'helm)
+  (helm-projectile-on)
+  (projectile-mode +1))
