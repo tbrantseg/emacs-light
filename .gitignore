@@ -10,3 +10,4 @@ elpa/*
 transient/*
 request/*
 session.*
+*.elc
