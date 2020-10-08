@@ -21,6 +21,7 @@
 
 ;; YASnippet
 (use-package yasnippet
+  :diminish
   :config
   (yas-global-mode 1)
   (yas-load-directory (expand-file-name (concat user-emacs-directory "snippets"))))

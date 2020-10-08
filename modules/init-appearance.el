@@ -45,6 +45,7 @@
 
 ;; Smartparens
 (use-package smartparens
+  :diminish
   :config
   (sp-with-modes '(c-mode c++-mode)
 		 (sp-local-pair "{" nil :post-handlers '(("||\n[i]" "RET")))
@@ -60,9 +61,12 @@
 
 (use-package which-key
   :defer 10
+  :diminish
   :config
   (setq which-key-popup-type 'side-window)
   (setq which-key-compute-remaps t)
   (which-key-mode 1))
+
+(fset 'yes-or-no-p 'y-or-n-p)
 
 ;; appearance.el ends here

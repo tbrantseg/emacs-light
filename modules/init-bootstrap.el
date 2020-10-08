@@ -13,6 +13,7 @@
 
 (eval-when-compile
   (require 'use-package))
+(use-package diminish)
 (setq use-package-always-ensure t)
 
 ;; bootstrap.el ends here
