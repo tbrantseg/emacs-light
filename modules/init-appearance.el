@@ -22,8 +22,7 @@
 (use-package airline-themes
   :config
   (load-theme 'airline-base16_chalk t))
-
-(unless window-system
+(unless (window-system)
   (menu-bar-mode -1))
 (if (fboundp 'tool-bar-mode)
     (tool-bar-mode -1))
