@@ -8,9 +8,12 @@
     "init-helm.el"
     "init-hydra.el"
     "init-ide.el"
+    "init-json.el"
     "init-docker.el"
     "init-python.el"
     "init-org.el"
     "init-sql.el"))	       
 
 (mapc 'load init-modules)
+
+;; init.el ends here

@@ -30,6 +30,7 @@
 		(unless (string-equal todo-state "TODO")
 		  (org-todo 'todo)))))))))
 (add-hook 'org-checkbox-statistics-hook 'my/org-checkbox-todo)
+(add-hook 'org-mode-hook 'visual-line-mode)
 
 (setq org-confirm-babel-evaluate nil)
 (setq org-todo-keywords
@@ -47,6 +48,7 @@
 
 (if (executable-find "sqlite3")
     (use-package org-roam
+      :diminish
       :hook
       (after-init . org-roam-mode)
       :custom

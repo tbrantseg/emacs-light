@@ -9,6 +9,20 @@
   :config
   (push '("github.cms.gov" "github.cms.gov/api/v3" "github.cms.gov" forge-github-repository) forge-alist))
 
+;; Windows clipboard
+(defun wsl-copy (start end)
+  (interactive "r")
+  (shell-command-on-region start end "clip.exe")
+  (message "Copied to Windows clipboard"))
+
+(defun wsl-paste ()
+  (interactive)
+  (let ((coding-system-for-read 'dos))
+    (insert (shell-command-to-string "powershell.exe -command 'Get-Clipboard'"))))
+
+(bind-key "C-c c" 'wsl-copy)
+(bind-key "C-c v" 'wsl-paste)
+
 ;; Company
 (use-package company
   :init
