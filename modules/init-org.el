@@ -65,7 +65,9 @@
 (org-babel-do-load-languages
  'org-babel-load-languages
  '((sql . t)
-   (org . t)))
+   (org . t)
+   (python . t)
+   (jupyter . t)))
 (put 'upcase-region 'disabled nil)
 
 ;; Org mode extra

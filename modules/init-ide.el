@@ -7,7 +7,7 @@
 (use-package forge
   :after magit
   :config
-  (push '("github.cms.gov" "github.cms.gov/api/v3" "github.cms.gov" forge-github-repository) forge-alist))
+  (push '("github.cms.gov" "github.cms.gov/api/v3" "github.cms.gov" "api.github.com" forge-github-repository) forge-alist))
 
 ;; Windows clipboard
 (defun wsl-copy (start end)
@@ -48,5 +48,13 @@
   (setq projectile-completion-system 'helm)
   (helm-projectile-on)
   (projectile-mode +1))
+
+;; Integrated terminal
+(use-package xterm-color
+  :config
+  (setq compilation-environment '("TERM=xterm-256color"))
+  (defun my/advice-compilation-filter (f proc string)
+    (funcall f proc (xterm-color-filter-string)))
+  (advice-add 'compilation-filter :around #'my/advice-compilation-filter))
 
 ;; ide.el ends here

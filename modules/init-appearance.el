@@ -6,6 +6,8 @@
 		    :height 110
 		    :weight 'normal)
 
+(use-package diminish)
+
 (use-package gruvbox-theme
   :config
   (if (daemonp)
