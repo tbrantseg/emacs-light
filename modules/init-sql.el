@@ -6,9 +6,15 @@
   :diminish
   :hook sql-mode)
 
+(use-package flx-ido)
+
 (use-package ejc-sql
   :config
   (require 'ejc-company)
+  (setq ejc-use-flx t)
+  (setq ejc-flx-threshold 2)
   (load-file (concat user-emacs-directory "secret.el"))
   (push 'ejc-company-backend company-backends)
-  (setq-local company-minimum-prefix-length 0))
+  (setq ejc-complete-on-dot t))
+
+(use-package csv-mode)

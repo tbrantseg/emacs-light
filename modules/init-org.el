@@ -1,3 +1,14 @@
+;; Exporters
+(require 'ox-md)
+(require 'ox-confluence)
+
+(use-package org
+  :ensure org-plus-contrib)
+
+(bind-key "C-c l" 'org-store-link)
+(setq org-src-preserve-indentation nil
+      org-edit-src-content-indentation 0)
+
 ;; Update todo state when sub-tasks done
 (defun org-summary-todo (n-done n-not-done)
   "Switch entry to DONE when all sub-entries are done and to TODO otherwise"
@@ -93,5 +104,10 @@
 	  ("Closed" . "DONE")))
   :bind
   ("C-c jg" . org-jira-get-projects))
+
+;; Confluence
+(use-package confluence
+  :config
+  (setq confluence-url "https://confluence.cms.gov"))
 
 ;; org.el

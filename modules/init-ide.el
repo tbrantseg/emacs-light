@@ -7,7 +7,7 @@
 (use-package forge
   :after magit
   :config
-  (push '("github.cms.gov" "github.cms.gov/api/v3" "github.cms.gov" "api.github.com" forge-github-repository) forge-alist))
+  (push '("github.cms.gov" "github.cms.gov/api/v3" "github.cms.gov" forge-github-repository) forge-alist))
 
 ;; Windows clipboard
 (defun wsl-copy (start end)

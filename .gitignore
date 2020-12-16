@@ -11,3 +11,4 @@ transient/*
 request/*
 session.*
 *.elc
+secret.el
