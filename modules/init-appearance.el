@@ -24,8 +24,9 @@
 (use-package airline-themes
   :config
   (load-theme 'airline-base16_chalk t))
-(unless (window-system)
+(unless (or (window-system) (daemonp))
   (menu-bar-mode -1))
+(display-time)
 (if (fboundp 'tool-bar-mode)
     (tool-bar-mode -1))
 (if (fboundp 'scroll-bar-mode)
@@ -35,7 +36,7 @@
 (use-package nlinum
   :init
   (add-hook 'prog-mode-hook 'nlinum-mode)
-  (unless window-system (setq nlinum-format "%d "))
+  (setq nlinum-format " %d ")
   :bind
   (("<M-f10>" . nlinum-mode)
    ("<M-RET>" . comment-indent-new-line)))

@@ -17,4 +17,3 @@
 (mapc 'load init-modules)
 
 ;; init.el ends here
-(put 'magit-clean 'disabled nil)

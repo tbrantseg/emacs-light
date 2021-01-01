@@ -1,9 +1,9 @@
 ;; Exporters
+(use-package org
+  :straight org-plus-contrib)
+
 (require 'ox-md)
 (require 'ox-confluence)
-
-(use-package org
-  :ensure org-plus-contrib)
 
 (bind-key "C-c l" 'org-store-link)
 (setq org-src-preserve-indentation nil

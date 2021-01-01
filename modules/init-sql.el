@@ -1,6 +1,6 @@
 (use-package sql-indent
   :diminish
-  :hook (sql-mode . sqlind-minor-mode))
+  :hook sql-mode)
 
 (use-package sqlup-mode
   :diminish
@@ -9,6 +9,7 @@
 (use-package flx-ido)
 
 (use-package ejc-sql
+  :straight (ejc-sql :type git :host github :repo "kostafey/ejc-sql")
   :config
   (require 'ejc-company)
   (setq ejc-use-flx t)

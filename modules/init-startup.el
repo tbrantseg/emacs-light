@@ -1,5 +1,6 @@
 ;; Startup
 
+(setq gc-cons-threshold 100000000)
 (setq read-process-output-max (* 1024 1024))
 
 (setq inhibit-startup-screen t)
@@ -8,6 +9,8 @@
        (concat ";; GNU Emacs " emacs-version "\n")
        (concat ";; Build system: " system-configuration "\n")
        (concat ";; Build date and time " (format-time-string "%Y-%m-%d %T" emacs-build-time) "\n\n")))
+
+(add-to-list 'default-frame-alist '(fullscreen . maximized))
 
 (setq user-full-name "Thomas Brantseg")
 (setq user-email-address "tom.brantseg@gmail.com")
