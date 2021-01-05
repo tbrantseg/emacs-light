@@ -1,6 +1,7 @@
-(use-package sql-indent
+(use-package sqlformat
   :diminish
-  :hook sql-mode)
+  :config
+  (setq sqlformat-command `pgformatter))
 
 (use-package sqlup-mode
   :diminish

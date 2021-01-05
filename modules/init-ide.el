@@ -24,6 +24,7 @@
 
 ;; Company
 (use-package company
+  :diminish
   :init
   (add-hook 'after-init-hook 'company-mode)
   (setq company-show-numbers t)
@@ -81,7 +82,7 @@
   (setq lsp-ui-peek-enable t)
   (define-key lsp-ui-mode-map [remap xref-find-definitions] #'lsp-ui-peek-find-definitions)
   (define-key lsp-ui-mode-map [remap xref-find-references] #'lsp-ui-peek-find-references)
-  (add-hook 'lsp-mode-hook 'lsp-ui-mode))
+  :hook (lsp-mode . lsp-ui-mode))
 
 (use-package lsp-python-ms
   :init

@@ -6,6 +6,15 @@
 		    :height 110
 		    :weight 'normal)
 
+(unless (or (window-system) (daemonp))
+  (menu-bar-mode -1))
+(display-time)
+(if (fboundp 'tool-bar-mode)
+    (tool-bar-mode -1))
+(if (fboundp 'scroll-bar-mode)
+    (scroll-bar-mode -1))
+(visual-line-mode 1)
+
 (use-package diminish)
 
 (use-package gruvbox-theme
@@ -24,14 +33,6 @@
 (use-package airline-themes
   :config
   (load-theme 'airline-base16_chalk t))
-(unless (or (window-system) (daemonp))
-  (menu-bar-mode -1))
-(display-time)
-(if (fboundp 'tool-bar-mode)
-    (tool-bar-mode -1))
-(if (fboundp 'scroll-bar-mode)
-    (scroll-bar-mode -1))
-(visual-line-mode 1)
 
 (use-package nlinum
   :init
@@ -42,8 +43,10 @@
    ("<M-RET>" . comment-indent-new-line)))
 
 (use-package rainbow-delimiters
-  :init
-  (add-hook 'prog-mode-hook 'rainbow-delimiters-mode))
+  :hook
+  (prog-mode . rainbow-delimiters-mode))
+;  :init
+;  (add-hook 'prog-mode-hook 'rainbow-delimiters-mode))
 
 ;; Smartparens
 (use-package smartparens

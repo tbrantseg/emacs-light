@@ -1,5 +1,6 @@
 ;; Helm
 (use-package helm
+  :diminish
   :init
   (global-unset-key (kbd "C-x c"))
   (when (executable-find "curl")
