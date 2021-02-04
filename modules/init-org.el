@@ -13,22 +13,7 @@
      (python . t)
      (jupyter . t)))
   (put 'upcase-region 'disabled nil)
-
-  ;; Org mode extra
-  (setq org-agenda-files '("~/docs/todo"))
-  (setq org-agenda-custom-commands
-	'(("c" "Simple agenda view"
-	   ((agenda "")
-	    (alltodo "")))))
-  ;; Miscellaneous org mode stuff
-  (org-babel-do-load-languages
-   'org-babel-load-languages
-   '((sql . t)
-     (org . t)
-     (dot . t)
-     (python . t)
-     (jupyter . t)))
-  (put 'upcase-region 'disabled nil)
+  (setq org-confirm-babel-evaluate nil)
 
   ;; Org mode extra
   (setq org-agenda-files '("~/docs/todo"))
@@ -39,6 +24,9 @@
   :bind
   ("C-c a" . org-agenda)
   ("C-c l" . org-store-link))
+
+
+(use-package ob-async)
 
 (require 'ox-md)
 (require 'ox-confluence)

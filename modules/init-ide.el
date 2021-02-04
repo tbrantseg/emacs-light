@@ -77,7 +77,7 @@
   (setq lsp-ui-sideline-ignore-duplicate t)
   (setq lsp-ui-sideline-show-code-actions t)
   (setq lsp-ui-sideline-show-diagnostics t)
-  (setq lsp-ui-sideline-show-hover t)
+  (setq lsp-ui-sideline-show-hover nil)
   (setq lsp-ui-sideline-show-symbol nil)
   (setq lsp-ui-peek-enable t)
   (define-key lsp-ui-mode-map [remap xref-find-definitions] #'lsp-ui-peek-find-definitions)

@@ -4,6 +4,7 @@ backups/*
 customize.el
 auto-saves.*
 '#.*
+#*
 recentf
 *~
 elpa/*
@@ -12,3 +13,6 @@ request/*
 session.*
 *.elc
 secret.el
+straight/*
+auto-saves/*
+.cache/*
