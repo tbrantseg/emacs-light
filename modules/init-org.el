@@ -16,7 +16,8 @@
   (setq org-confirm-babel-evaluate nil)
 
   ;; Org mode extra
-  (setq org-agenda-files '("~/docs/todo"))
+  (setq org-agenda-files '("~/org-roam/"))
+  (setq org-columns-default-format-for-agenda "%ITEM %TODO %TAGS(TICKET)")
   (setq org-agenda-custom-commands
 	'(("c" "Simple agenda view"
 	   ((agenda "")
@@ -25,6 +26,7 @@
   ("C-c a" . org-agenda)
   ("C-c l" . org-store-link))
 
+(use-package org-agenda-property)
 
 (use-package ob-async)
 

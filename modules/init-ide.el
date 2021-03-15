@@ -4,12 +4,16 @@
   :config
   (push '("~/repos" . 1) magit-repository-directories)
   :bind
-  (("C-x g" . magit-status)))
+  (("C-x g" . magit)))
 
 (use-package forge
   :after magit
   :config
   (push '("github.cms.gov" "github.cms.gov/api/v3" "github.cms.gov" forge-github-repository) forge-alist))
+
+(use-package github-review
+  :config
+  (setq github-review-host "github.cms.gov/api/v3"))
 
 ;; Windows clipboard
 (defun wsl-copy (start end)
@@ -33,12 +37,20 @@
   :config
   (global-company-mode))
 
+(diminish 'eldoc-mode)
+
+(use-package highlight-indent-guides)
+(use-package fold-dwim
+  :bind ("<f7>" . fold-dwim-toggle))
+
 ;; YASnippet
 (use-package yasnippet
   :diminish
   :config
   (yas-global-mode 1)
   (yas-load-directory (expand-file-name (concat user-emacs-directory "snippets"))))
+
+(diminish 'yas-minor-mode)
 
 (use-package yasnippet-snippets
   :after yasnippet)
@@ -64,7 +76,7 @@
   (advice-add 'compilation-filter :around #'my/advice-compilation-filter))
 
 (use-package lsp-mode
-  :hook (python-mode . lsp)
+  :hook (python-mode . lsp) (json-mode . lsp)
   :init
   (setq lsp-completion-provider :capf)
   (setq lsp-keymap-prefix "C-c k")

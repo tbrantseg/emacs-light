@@ -24,15 +24,15 @@
 		(lambda (frame)
 		  (select-frame frame)
 		  (load-theme 'gruvbox-dark-medium t)))
-    (load-theme 'gruvbox-dark-medium t)))
+    (load-theme 'gruvbox-dark-hard t)))
 
 (use-package powerline
   :config
-  (powerline-center-theme))
+  (powerline-default-theme))
 
 (use-package airline-themes
   :config
-  (load-theme 'airline-base16_chalk t))
+  (load-theme 'airline-base16_gruvbox_dark_hard t))
 
 (use-package nlinum
   :init
