@@ -9,5 +9,8 @@
     (json-reformat-region (point-min) (point-max))
     (indent-region (point-min) (point-max)))
 
-  :bind (:map json-mode-map ("C-c i" . js-sort-and-indent))
-  :hook (json-mode . hs-minor-mode))
+  :bind
+  (:map json-mode-map ("C-c i" . js-sort-and-indent))
+  :hook
+  (json-mode . hs-minor-mode)
+  (json-mode . highlight-indent-guides-mode))

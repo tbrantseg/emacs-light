@@ -1,15 +1,19 @@
 ;; Exporters
 (use-package org
   :straight org-plus-contrib
+  :init
+  (add-hook 'org-mode-hook #'visual-line-mode)
   :config
   (setq org-src-preserve-indentation nil
 	org-edit-src-content-indentation 0)
+  (setq org-ditaa-jar-path (concat user-emacs-directory "straight/repos/org/contrib/scripts/ditaa.jar"))
   ;; Miscellaneous org mode stuff
   (org-babel-do-load-languages
    'org-babel-load-languages
    '((sql . t)
      (org . t)
      (dot . t)
+     (ditaa . t)
      (python . t)
      (jupyter . t)))
   (put 'upcase-region 'disabled nil)
@@ -25,7 +29,6 @@
   :bind
   ("C-c a" . org-agenda)
   ("C-c l" . org-store-link))
-
 (use-package org-agenda-property)
 
 (use-package ob-async)

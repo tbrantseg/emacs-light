@@ -1,7 +1,8 @@
 (use-package sqlformat
   :diminish
   :config
-  (setq sqlformat-command `pgformatter))
+  (setq sqlformat-command `sqlformat)
+  (setq sqlformat-args '("-a" "-k" "upper")))
 
 (use-package sqlup-mode
   :diminish

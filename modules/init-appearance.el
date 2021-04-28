@@ -14,30 +14,23 @@
 (if (fboundp 'scroll-bar-mode)
     (scroll-bar-mode -1))
 (visual-line-mode 1)
-
+(setq visible-bell 1)
 (use-package diminish)
 
-(use-package gruvbox-theme
+(use-package doom-themes
   :config
-  (if (daemonp)
-      (add-hook 'after-make-frame-functions
-		(lambda (frame)
-		  (select-frame frame)
-		  (load-theme 'gruvbox-dark-medium t)))
-    (load-theme 'gruvbox-dark-hard t)))
+  (load-theme 'doom-gruvbox t))
 
-(use-package powerline
-  :config
-  (powerline-default-theme))
-
-(use-package airline-themes
-  :config
-  (load-theme 'airline-base16_gruvbox_dark_hard t))
+(use-package doom-modeline
+  :init  
+  (doom-modeline-mode 1))
 
 (use-package nlinum
   :init
   (add-hook 'prog-mode-hook 'nlinum-mode)
   (setq nlinum-format " %d ")
+  :config
+  (setq nlinum-highlight-current-line t)
   :bind
   (("<M-f10>" . nlinum-mode)
    ("<M-RET>" . comment-indent-new-line)))

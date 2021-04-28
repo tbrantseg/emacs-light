@@ -15,6 +15,10 @@
   :config
   (setq github-review-host "github.cms.gov/api/v3"))
 
+(setq ediff-diff-options "-w")
+(setq ediff-split-window-function 'split-window-horizontally)
+(setq ediff-window-setup-function 'ediff-setup-windows-plain)
+
 ;; Windows clipboard
 (defun wsl-copy (start end)
   (interactive "r")
@@ -39,7 +43,13 @@
 
 (diminish 'eldoc-mode)
 
-(use-package highlight-indent-guides)
+(use-package highlight-indent-guides
+  :diminish
+  :config
+  (setq highlight-indent-guides-responsive "stack")
+  (setq highlight-indent-guides-bitmap-function 'highlight-indent-guides--bitmap-line)
+  (setq highlight-indent-guides-method 'bitmap))
+
 (use-package fold-dwim
   :bind ("<f7>" . fold-dwim-toggle))
 
@@ -72,15 +82,15 @@
   :config
   (setq compilation-environment '("TERM=xterm-256color"))
   (defun my/advice-compilation-filter (f proc string)
-    (funcall f proc (xterm-color-filter-string)))
+    (funcall f proc (xterm-color-filter string)))
   (advice-add 'compilation-filter :around #'my/advice-compilation-filter))
 
 (use-package lsp-mode
-  :hook (python-mode . lsp) (json-mode . lsp)
+  :hook (python-mode . lsp) (json-mode . lsp) (scala-mode . lsp) (lsp-mode . lsp-lens-mode)
   :init
   (setq lsp-completion-provider :capf)
   (setq lsp-keymap-prefix "C-c k")
-  (setq lsp-sqls-server "~/soft/bin/sqls")
+  (setq lsp-sqls-server "sqls")
   (setq lsp-sqls-workspace-config-path nil)
   :commands (lsp lsp-deferred))
 
@@ -95,6 +105,22 @@
   (define-key lsp-ui-mode-map [remap xref-find-definitions] #'lsp-ui-peek-find-definitions)
   (define-key lsp-ui-mode-map [remap xref-find-references] #'lsp-ui-peek-find-references)
   :hook (lsp-mode . lsp-ui-mode))
+
+(use-package treemacs
+  :defer t
+  :init
+  (bind-key "C-c t" 'treemacs))
+
+(use-package treemacs-projectile
+  :after (treemacs projectile))
+
+(use-package treemacs-magit
+  :after (treemacs magit))
+
+(use-package lsp-treemacs
+  :after (treemacs lsp)
+  :config
+  (add-hook 'treemacs-mode-hook 'lsp-treemacs-sync-mode))
 
 (use-package lsp-python-ms
   :init
