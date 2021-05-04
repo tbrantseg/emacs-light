@@ -32,6 +32,8 @@
 (setq kept-new-versions 5)
 (setq kept-old-versions 2)
 
+(advice-add 'risky-local-variable-p :override #'ignore)
+
 (setq custom-file (expand-file-name "customize.el" user-emacs-directory))
 (when (file-exists-p custom-file)
   (load custom-file))

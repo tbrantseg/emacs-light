@@ -19,7 +19,9 @@
 
 (use-package doom-themes
   :config
-  (load-theme 'doom-gruvbox t))
+  (load-theme 'doom-gruvbox t)
+  (doom-themes-visual-bell-config)
+  (doom-themes-org-config))
 
 (use-package doom-modeline
   :init  

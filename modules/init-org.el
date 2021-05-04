@@ -1,13 +1,10 @@
-;; Exporters
-(use-package org
-  :straight org-plus-contrib
+(use-package org-plus-contrib
   :init
   (add-hook 'org-mode-hook #'visual-line-mode)
   :config
-  (setq org-src-preserve-indentation nil
-	org-edit-src-content-indentation 0)
+  (setq org-src-preserve-indentation nil)
+  (setq org-edit-src-content-indentation 0)
   (setq org-ditaa-jar-path (concat user-emacs-directory "straight/repos/org/contrib/scripts/ditaa.jar"))
-  ;; Miscellaneous org mode stuff
   (org-babel-do-load-languages
    'org-babel-load-languages
    '((sql . t)
@@ -18,23 +15,25 @@
      (jupyter . t)))
   (put 'upcase-region 'disabled nil)
   (setq org-confirm-babel-evaluate nil)
-
-  ;; Org mode extra
   (setq org-agenda-files '("~/org-roam/"))
   (setq org-columns-default-format-for-agenda "%ITEM %TODO %TAGS(TICKET)")
   (setq org-agenda-custom-commands
-	'(("c" "Simple agenda view"
-	   ((agenda "")
-	    (alltodo "")))))
+	'(("c" "Simple agenda view")
+	  ((agenda "")
+	   (alltodo ""))))
   :bind
   ("C-c a" . org-agenda)
   ("C-c l" . org-store-link))
+
+(straight-use-package
+ '(org-contrib
+  :type git
+  :repo "https://git.sr.ht/~bzg/org-contrib")
+ :config
+ (require 'ox-confluence))
+
 (use-package org-agenda-property)
-
 (use-package ob-async)
-
-(require 'ox-md)
-(require 'ox-confluence)
 
 (use-package graphviz-dot-mode
   :diminish

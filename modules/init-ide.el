@@ -120,7 +120,7 @@
 (use-package lsp-treemacs
   :after (treemacs lsp)
   :config
-  (add-hook 'treemacs-mode-hook 'lsp-treemacs-sync-mode))
+  (lsp-treemacs-sync-mode))
 
 (use-package lsp-python-ms
   :init
