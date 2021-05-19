@@ -2,7 +2,7 @@
   :diminish
   :config
   (setq sqlformat-command `sqlformat)
-  (setq sqlformat-args '("-a" "-k" "upper")))
+  (setq sqlformat-args '("-k" "upper" "-a")))
 
 (use-package sqlup-mode
   :diminish

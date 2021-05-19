@@ -1,4 +1,4 @@
-(use-package org-plus-contrib
+(use-package org
   :init
   (add-hook 'org-mode-hook #'visual-line-mode)
   :config
@@ -25,15 +25,29 @@
   ("C-c a" . org-agenda)
   ("C-c l" . org-store-link))
 
-(straight-use-package
- '(org-contrib
-  :type git
-  :repo "https://git.sr.ht/~bzg/org-contrib")
- :config
- (require 'ox-confluence))
+(use-package org-contrib)
+(require 'ox-confluence)
 
 (use-package org-agenda-property)
 (use-package ob-async)
+
+(use-package pdf-tools
+   :pin manual
+   :config
+   (pdf-tools-install)
+   (setq-default pdf-view-display-size 'fit-width)
+   (define-key pdf-view-mode-map (kbd "C-s") 'isearch-forward)
+   :custom
+   (pdf-annot-activate-created-annotations t "automatically annotate highlights"))
+
+(setq TeX-view-program-selection '((output-pdf "PDF Tools"))
+      TeX-view-program-list '(("PDF Tools" TeX-pdf-tools-sync-view))
+      TeX-source-correlate-start-server t)
+
+(add-hook 'TeX-after-compilation-finished-functions
+          #'TeX-revert-document-buffer)
+(add-hook 'pdf-view-mode-hook (lambda() (linum-mode -1)))
+
 
 (use-package graphviz-dot-mode
   :diminish

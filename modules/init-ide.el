@@ -86,7 +86,12 @@
   (advice-add 'compilation-filter :around #'my/advice-compilation-filter))
 
 (use-package lsp-mode
-  :hook (python-mode . lsp) (json-mode . lsp) (scala-mode . lsp) (lsp-mode . lsp-lens-mode)
+  :hook
+  (python-mode . lsp)
+  (json-mode . lsp)
+  (yaml-mode . lsp)
+  (scala-mode . lsp)
+  (lsp-mode . lsp-lens-mode)
   :init
   (setq lsp-completion-provider :capf)
   (setq lsp-keymap-prefix "C-c k")
@@ -121,11 +126,5 @@
   :after (treemacs lsp)
   :config
   (lsp-treemacs-sync-mode))
-
-(use-package lsp-python-ms
-  :init
-  (setq lsp-python-ms-auto-install-server t)
-  :hook (python-mode . (lambda() (require 'lsp-python-ms) (lsp-deferred))))
-
 
 ;; ide.el ends here

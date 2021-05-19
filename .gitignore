@@ -3,8 +3,9 @@ auto-saves/*
 backups/*
 customize.el
 auto-saves.*
-'#.*
+#.*
 #*
+#!*
 recentf
 *~
 elpa/*
@@ -16,3 +17,12 @@ secret.el
 straight/*
 auto-saves/*
 .cache/*
+.lsp-session*
+.projectile
+org-roam.db
+tramp*
+forge-database.sqlite
+eshell/*
+.org-id-locations
+.dap-breakpoints
+projectile.cache

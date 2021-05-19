@@ -6,3 +6,5 @@
   (add-to-list 'auto-mode-alist '("Dockerfile\\'" . dockerfile-mode)))
 
 (use-package docker-compose-mode)
+
+(use-package jenkinsfile-mode)
