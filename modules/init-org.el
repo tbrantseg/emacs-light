@@ -27,12 +27,13 @@
 
 (use-package org-contrib)
 (require 'ox-confluence)
+(require 'ox-md)
 
 (use-package org-agenda-property)
-(use-package ob-async)
+(use-package ob-async
+  :config (setq ob-async-no-async-languages-alist '("jupyter-python")))
 
 (use-package pdf-tools
-   :pin manual
    :config
    (pdf-tools-install)
    (setq-default pdf-view-display-size 'fit-width)
@@ -57,18 +58,18 @@
 
 (if (executable-find "sqlite3")
     (use-package org-roam
-      :diminish
-      :hook
-      (after-init . org-roam-mode)
-      :custom
-      (org-roam-directory "/home/tom/org-roam")
-      :bind (:map org-roam-mode-map
-		  (("C-c n l" . org-roam)
-		   ("C-c n f" . org-roam-find-file)
-		   ("C-c n g" . org-roam-graph-show))
-		  :map org-mode-map
-		  (("C-c n i" . org-roam-insert))
-		  (("C-c n I" . org-roam-insert-immediate))))
+      :ensure t
+      :custom (org-roam-directory "/home/tom/org-roam")
+      :bind (("C-c n l" . org-roam-buffer-toggle)
+	     ("C-c n f" . org-roam-node-find)
+	     ("C-c n g" . org-roam-graph)
+	     ("C-c n i" . org-roam-node-insert)
+	     ("C-c n c" . org-roam-capture)
+	     ("C-c n j" . org-roam-dailies-capture-today))
+      :init (setq org-roam-v2-ack t)
+      :config
+      (org-roam-db-autosync-enable)
+      (require 'org-roam-protocol))
   (message "Could not find sqlite3! Org-roam not loaded."))
 
 (use-package org-jira
@@ -86,10 +87,5 @@
 	  ("Closed" . "DONE")))
   :bind
   ("C-c jg" . org-jira-get-projects))
-
-;; Confluence
-(use-package confluence
-  :config
-  (setq confluence-url "https://confluence.cms.gov"))
 
 ;; org.el

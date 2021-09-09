@@ -12,8 +12,12 @@
   (push '("github.cms.gov" "github.cms.gov/api/v3" "github.cms.gov" forge-github-repository) forge-alist))
 
 (use-package github-review
+  :after magit
   :config
   (setq github-review-host "github.cms.gov/api/v3"))
+
+(use-package git-modes
+  :after magit)
 
 (setq ediff-diff-options "-w")
 (setq ediff-split-window-function 'split-window-horizontally)
@@ -65,8 +69,6 @@
 (use-package yasnippet-snippets
   :after yasnippet)
 
-(use-package helm-rg)
-
 (use-package projectile
   :diminish
   :bind-keymap
@@ -85,6 +87,7 @@
     (funcall f proc (xterm-color-filter string)))
   (advice-add 'compilation-filter :around #'my/advice-compilation-filter))
 
+;; LSP stuff
 (use-package lsp-mode
   :hook
   (python-mode . lsp)
@@ -95,7 +98,7 @@
   :init
   (setq lsp-completion-provider :capf)
   (setq lsp-keymap-prefix "C-c k")
-  (setq lsp-sqls-server "sqls")
+  (setq lsp-sqls-server "/home/tom/go/bin/sqls")
   (setq lsp-sqls-workspace-config-path nil)
   :commands (lsp lsp-deferred))
 
@@ -126,5 +129,8 @@
   :after (treemacs lsp)
   :config
   (lsp-treemacs-sync-mode))
+
+;; Polymode
+(use-package polymode)
 
 ;; ide.el ends here

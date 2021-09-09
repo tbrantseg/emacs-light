@@ -30,4 +30,6 @@
    ("C-i" . helm-execute-persistent-action)
    ("C-z" . helm-select-action)))
 
+(use-package helm-rg)
+
 ;; helm.el
