@@ -8,7 +8,8 @@
   :diminish  
   :hook sql-mode
   :config
-  (add-to-list 'sqlup-blacklist "match"))
+  (dolist (kw '("match" "ref"))
+    (add-to-list 'sqlup-blacklist kw)))
 
 (use-package flx-ido)
 

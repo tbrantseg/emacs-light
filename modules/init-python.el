@@ -13,6 +13,8 @@
 
 (use-package pipenv)
 
+(use-package poetry)
+
 (use-package ein)
 
 (use-package yapfify
@@ -20,6 +22,9 @@
   (python-mode . yapf-mode))
 
 (use-package lsp-python-ms
+  :after poetry
+  :config
+  (when (stringp (poetry-find-project-root)) (poetry-venv-workon))
   :init (setq lsp-python-ms-auto-install-server t)
   :hook (python-mode . (lambda()
 			 (require 'lsp-python-ms)
