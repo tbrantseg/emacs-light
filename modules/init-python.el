@@ -21,16 +21,11 @@
   :hook
   (python-mode . yapf-mode))
 
-(use-package lsp-python-ms
-  :after poetry
-  :config
-  (when (stringp (poetry-find-project-root)) (poetry-venv-workon))
-  :init (setq lsp-python-ms-auto-install-server t)
+(use-package lsp-pyright
   :hook (python-mode . (lambda()
-			 (require 'lsp-python-ms)
+			 (require 'lsp-pyright)
 			 (lsp-deferred))))
 
-(add-hook 'python-mode-hook 'highlight-indent-guides-mode)
 
 (define-hostmode poly-python-hostmode
   :mode 'python-mode)

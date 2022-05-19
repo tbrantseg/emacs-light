@@ -12,5 +12,4 @@
   :bind
   (:map json-mode-map ("C-c i" . js-sort-and-indent))
   :hook
-  (json-mode . hs-minor-mode)
-  (json-mode . highlight-indent-guides-mode))
+  (json-mode . hs-minor-mode))

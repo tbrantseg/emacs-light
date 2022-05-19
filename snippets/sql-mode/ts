@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: dbt_ts
+# key: ts
+# --
+{{ dbt_utils.current_timestamp() }} $0

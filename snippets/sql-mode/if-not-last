@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: if-not-last
+# key: ifl
+# --
+{% if not loop.last %}$1{% endif %}

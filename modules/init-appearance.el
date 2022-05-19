@@ -19,13 +19,15 @@
 
 (use-package doom-themes
   :config
-  (load-theme 'doom-gruvbox t)
+  (load-theme 'doom-zenburn t)
   (doom-themes-visual-bell-config)
   (doom-themes-org-config))
 
 (use-package doom-modeline
-  :init  
+  :config
+  (setq doom-modeline-height 1)
   (doom-modeline-mode 1))
+
 
 (use-package nlinum
   :init

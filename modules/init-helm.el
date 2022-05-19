@@ -2,10 +2,14 @@
 (use-package helm
   :diminish
   :init
+;; (setq straight-recipe-overrides nil)
+;; (straight-override-recipe '(helm :files ("*.el" "emacs-helm.sh" (:exclude "helm-core.el" "helm-lib.el" "helm-source.el" "helm-multi-match.el"))))
+;; (straight-override-recipe '(helm-core :files ("helm-core.el" "helm-lib.el" "helm-source.el" "helm-multi-match.el")))
+
   (global-unset-key (kbd "C-x c"))
   (when (executable-find "curl")
     (setq helm-net-prefer-curl t))
-  (setq helm-split-window-in-side-p t)
+  (setq helm-split-window-inside-p t)
   (setq helm-move-to-line-cycle-in-source t)
   (setq helm-ff-search-library-in-sexp t)
   (setq helm-scroll-amount 8)
@@ -13,10 +17,12 @@
   (setq helm-M-x-fuzzy-match t)
   (setq helm-buffers-fuzzy-matching t)
   (setq helm-recentf-fuzzy-match t)
+  (setq helm-ff-skip-boring-files t)
+  (add-to-list 'helm-boring-file-regexp-list "#.+#")
 
   :config
   (add-to-list 'helm-sources-using-default-as-input 'helm-source-man-pages)
-  (helm-mode 1)
+  (helm-mode 1)  
   (helm-autoresize-mode t)
 
   :bind

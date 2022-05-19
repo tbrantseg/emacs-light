@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: loop-index
+# key: i
+# --
+{{ loop.index }}

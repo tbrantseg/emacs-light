@@ -47,12 +47,13 @@
 
 (diminish 'eldoc-mode)
 
-(use-package highlight-indent-guides
-  :diminish
-  :config
-  (setq highlight-indent-guides-responsive "stack")
-  (setq highlight-indent-guides-bitmap-function 'highlight-indent-guides--bitmap-line)
-  (setq highlight-indent-guides-method 'bitmap))
+ (use-package highlight-indent-guides
+   :diminish
+   :config
+   (setq highlight-indent-guides-responsive "stack")
+   (setq highlight-indent-guides-bitmap-function 'highlight-indent-guides--bitmap-dots)
+   (set-face-foreground 'highlight-indent-guides-character-face "dimgray")
+   (setq highlight-indent-guides-method 'character))
 
 (use-package fold-dwim
   :bind ("<f7>" . fold-dwim-toggle))
@@ -129,6 +130,8 @@
   :after (treemacs lsp)
   :config
   (lsp-treemacs-sync-mode))
+
+(use-package jenkinsfile-mode)
 
 ;; Polymode
 (use-package polymode)
