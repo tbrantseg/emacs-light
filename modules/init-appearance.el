@@ -17,6 +17,8 @@
 (setq visible-bell 1)
 (use-package diminish)
 
+(use-package all-the-icons)
+
 (use-package doom-themes
   :config
   (load-theme 'doom-zenburn t)

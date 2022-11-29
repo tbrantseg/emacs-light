@@ -131,7 +131,10 @@
   :config
   (lsp-treemacs-sync-mode))
 
-(use-package jenkinsfile-mode)
+(use-package jenkinsfile-mode
+  :init
+  (electric-pair-local-mode)
+  (highlight-indent-guides-mode))
 
 ;; Polymode
 (use-package polymode)

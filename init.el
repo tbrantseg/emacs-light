@@ -5,13 +5,13 @@
   '("init-startup.el"
     "init-bootstrap.el"
     "init-appearance.el"
+    "init-org.el"
     "init-helm.el"
     "init-hydra.el"
     "init-ide.el"
     "init-json.el"
     "init-docker.el"
     "init-python.el"
-    "init-org.el"
     "init-scala.el"
     "init-sql.el"))	       
 

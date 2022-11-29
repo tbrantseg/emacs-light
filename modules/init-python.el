@@ -21,11 +21,10 @@
   :hook
   (python-mode . yapf-mode))
 
-(use-package lsp-pyright
-  :hook (python-mode . (lambda()
-			 (require 'lsp-pyright)
-			 (lsp-deferred))))
-
+;; (use-package lsp-pyright
+;;   :hook (python-mode . (lambda()
+;; 			 (require 'lsp-pyright)
+;; 			 (lsp-deferred))))
 
 (define-hostmode poly-python-hostmode
   :mode 'python-mode)
